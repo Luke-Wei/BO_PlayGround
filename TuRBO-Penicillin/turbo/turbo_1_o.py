@@ -178,47 +178,7 @@ class Turbo1:
             hypers = gp.state_dict()
 
         # Create the trust region boundaries
-        # x_center = X[fX.argmin().item(), :][None, :]
-
-
-        # choose x_center via counterfactual
-        '''
-        use fX and  whether use x to choose x_center
-        if use x, then x_center = x
-        if not use x, then x_center = X[fX.argmin().item(), :][None, :]     
-        
-        
-         
-        '''
         x_center = X[fX.argmin().item(), :][None, :]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #
-
-
         weights = gp.covar_module.base_kernel.lengthscale.cpu().detach().numpy().ravel()
         weights = weights / weights.mean()  # This will make the next line more stable
         weights = weights / np.prod(np.power(weights, 1.0 / len(weights)))  # We now have weights.prod() = 1
