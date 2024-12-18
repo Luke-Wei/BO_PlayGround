@@ -21,6 +21,8 @@ from torch.quasirandom import SobolEngine
 from .gp import train_gp
 from .utils import from_unit_cube, latin_hypercube, to_unit_cube
 
+from cmgp import CMGP
+
 
 class Turbo1:
     """The TuRBO-1 algorithm.
@@ -178,19 +180,16 @@ class Turbo1:
             hypers = gp.state_dict()
 
         # Create the trust region boundaries
-        # x_center = X[fX.argmin().item(), :][None, :]
+        x_center = X[fX.argmin().item(), :][None, :]
 
 
         # choose x_center via counterfactual
-        '''
-        use fX and  whether use x to choose x_center
-        if use x, then x_center = x
-        if not use x, then x_center = X[fX.argmin().item(), :][None, :]     
+        """
+        use fX and  whether use x as a x_center as a counterfact to bulid a CMGP model
+        then use the CMGP model to predict the best x_center with the gap of whether choose x as a x_center
+        """
         
-        
-         
-        '''
-        x_center = X[fX.argmin().item(), :][None, :]
+
 
 
 
