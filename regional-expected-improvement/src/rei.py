@@ -118,3 +118,5 @@ class qRegionalExpectedImprovement(MCAcquisitionFunction):
         obj = (obj - self.best_f.unsqueeze(-1).to(obj)).clamp_min(0).reshape(-1, self.n_region, batch_shape, q)
         q_rei = obj.max(dim=-1)[0].mean(dim=(0,1))
         return q_rei
+
+
